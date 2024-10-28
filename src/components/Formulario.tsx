@@ -46,115 +46,123 @@ const Formulario = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <TypeOfRequest register={register} errors={errors} />
+    <>
+      <div className="w-full flex items-center justify-center">
+        <form className="w-full px-80 bg-black" onSubmit={handleSubmit(onSubmit)}>
+          <TypeOfRequest register={register} errors={errors} />
 
-      <ReasonRequest register={register} errors={errors} />
-
-      <div>
-        <label>Tipo de Persona:</label>
-        <select
-          {...register("typePerson")}
-          onChange={handleTipoPersonaChange}
-          value={typePerson}
-        >
-          {typePersonOptions.map((option) => (
-            <option key={option.value} value={option.value}>
-              {option.label}
-            </option>
-          ))}
-        </select>
-      </div>
-
-      {typePerson === "1" && ( // Cambiar condiciones a valores de typePersonOptions
-        <>
-          <TypeDocument register={register} errors={errors} />
+          <ReasonRequest register={register} errors={errors} />
 
           <div>
-            <label htmlFor="numberDocument">Número de documento</label>
-            <input
-              id="numberDocument"
-              {...register("numberDocument")}
-              placeholder="Número Documento"
-            />
-            {errors.numberDocument && <p>{errors.numberDocument.message}</p>}
+            <label>Tipo de Persona:</label>
+            <select
+              {...register("typePerson")}
+              onChange={handleTipoPersonaChange}
+              value={typePerson}
+            >
+              {typePersonOptions.map((option) => (
+                <option key={option.value} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
+            </select>
           </div>
-          <NaturalPerson register={register} errors={errors} />
-        </>
-      )}
 
-      {typePerson === "2" && (
-        <LegalPerson register={register} errors={errors} />
-      )}
+          {typePerson === "1" && ( // Cambiar condiciones a valores de typePersonOptions
+            <>
+              <TypeDocument register={register} errors={errors} />
 
-      {(typePerson == "1" || typePerson == "2") && (
-        <>
-          <ResponseMedium register={register} errors={errors} />
-        </>
-      )}
-      {typePerson == "1" && (
-        <>
+              <div>
+                <label htmlFor="numberDocument">Número de documento</label>
+                <input
+                  id="numberDocument"
+                  {...register("numberDocument")}
+                  placeholder="Número Documento"
+                />
+                {errors.numberDocument && (
+                  <p>{errors.numberDocument.message}</p>
+                )}
+              </div>
+              <NaturalPerson register={register} errors={errors} />
+            </>
+          )}
+
+          {typePerson === "2" && (
+            <LegalPerson register={register} errors={errors} />
+          )}
+
+          {(typePerson == "1" || typePerson == "2") && (
+            <>
+              <ResponseMedium register={register} errors={errors} />
+            </>
+          )}
+          {typePerson == "1" && (
+            <>
+              <div>
+                <label htmlFor="idPhone">Teléfono</label>
+                <input
+                  id="idPhone"
+                  {...register("phoneNumber")}
+                  placeholder="Teléfono"
+                />
+                {errors.phoneNumber && <p>{errors.phoneNumber.message}</p>}
+              </div>
+            </>
+          )}
           <div>
-            <label htmlFor="idPhone">Teléfono</label>
-            <input
-              id="idPhone"
-              {...register("phoneNumber")}
-              placeholder="Teléfono"
-            />
-            {errors.phoneNumber && <p>{errors.phoneNumber.message}</p>}
-          </div>
-        </>
-      )}
-      <div>
-        <label htmlFor="idDescriptionPqrs">
-          Espacio para describir su PQRSD *
-        </label>
-
-        <textarea
-          id="idDescriptionPqrs"
-          {...register("descriptionPqrs")}
-        ></textarea>
-        {errors.descriptionPqrs && <p>{errors.descriptionPqrs.message}</p>}
-      </div>
-
-      {typePerson == "1" && (
-        <>
-          <div>
-            <h3>Caracterización ciudadana *</h3>
-            <Population register={register} errors={errors} />
-            <Disability register={register} errors={errors} />
-          </div>
-        </>
-      )}
-
-      <FileUploadComponent />
-
-      {(typePerson == "1" || typePerson == "2") && (
-        <>
-          <InformationProcessingLaw />
-
-          <div>
-            <input
-              id="idTermAndConditions"
-              type="checkbox"
-              {...register("aceptaTerminos")}
-            />
-            <label htmlFor="idTermAndConditions">
-              Acepto los términos del servicio *
+            <label htmlFor="idDescriptionPqrs">
+              Espacio para describir su PQRSD *
             </label>
-            {errors.aceptaTerminos && <p>{errors.aceptaTerminos.message}</p>}
+
+            <textarea
+              id="idDescriptionPqrs"
+              {...register("descriptionPqrs")}
+            ></textarea>
+            {errors.descriptionPqrs && <p>{errors.descriptionPqrs.message}</p>}
           </div>
-        </>
-      )}
 
-      {typePerson == "3" && (
-        <>
-          <ResponseMediumAnonymous register={register} errors={errors} />
-        </>
-      )}
+          {typePerson == "1" && (
+            <>
+              <div>
+                <h3>Caracterización ciudadana *</h3>
+                <Population register={register} errors={errors} />
+                <Disability register={register} errors={errors} />
+              </div>
+            </>
+          )}
 
-      <button type="submit">Enviar</button>
-    </form>
+          <FileUploadComponent />
+
+          {(typePerson == "1" || typePerson == "2") && (
+            <>
+              <InformationProcessingLaw />
+
+              <div>
+                <input
+                  id="idTermAndConditions"
+                  type="checkbox"
+                  {...register("aceptaTerminos")}
+                />
+                <label htmlFor="idTermAndConditions">
+                  Acepto los términos del servicio *
+                </label>
+                {errors.aceptaTerminos && (
+                  <p>{errors.aceptaTerminos.message}</p>
+                )}
+              </div>
+            </>
+          )}
+
+          {typePerson == "3" && (
+            <>
+              <ResponseMediumAnonymous register={register} errors={errors} />
+            </>
+          )}
+
+          <button type="submit">Enviar</button>
+        </form>
+      </div>
+    </>
   );
 };
 

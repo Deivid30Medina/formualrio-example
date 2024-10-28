@@ -4,7 +4,9 @@ function App() {
 
   return (
     <>
-      <h1>Formulario de Registro</h1>
+      <h1 className="bg-red-900 text-center w-full">Formulario de Registro</h1>
+      <h1 style={{ backgroundColor: 'red', textAlign: 'center' }}>Formulario de Registro</h1>
+
       <Formulario />
     </>
   )
