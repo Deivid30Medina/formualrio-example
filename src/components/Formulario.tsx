@@ -32,7 +32,9 @@ const Formulario = () => {
     console.log("Datos del formulario:", data);
   };
 
-  const handleTipoPersonaChange = (event) => {
+  const handleTipoPersonaChange = (
+    event: React.ChangeEvent<HTMLSelectElement>
+  ) => {
     const selectedValue = event.target.value;
     const commonFields = {
       typePerson: selectedValue,
@@ -132,8 +134,14 @@ const Formulario = () => {
           <InformationProcessingLaw />
 
           <div>
-            <input id="idTermAndConditions" type="checkbox" {...register("aceptaTerminos")} />
-            <label htmlFor="idTermAndConditions">Acepto los términos del servicio *</label>
+            <input
+              id="idTermAndConditions"
+              type="checkbox"
+              {...register("aceptaTerminos")}
+            />
+            <label htmlFor="idTermAndConditions">
+              Acepto los términos del servicio *
+            </label>
             {errors.aceptaTerminos && <p>{errors.aceptaTerminos.message}</p>}
           </div>
         </>
