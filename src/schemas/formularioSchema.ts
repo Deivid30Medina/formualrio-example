@@ -1,6 +1,37 @@
 import { z } from "zod";
-import { requestOptions, reasonForRequestOptions, typeDocumentOptions, responseMedium, populationOptions, disabilityOptions, typePersonOptions } from "../utils/indexOptions";
-import { fileSizeValidation, fileTypeValidation } from "./fileTypeValidation";
+import { requestOptions, reasonForRequestOptions, typeDocumentOptions, responseMedium, populationOptions, disabilityOptions, typePersonOptions, allowedFileTypesOptions } from "../utils/indexOptions";
+
+const MAX_FILE_SIZE = 100 * 1024 * 1024;
+
+export const allowedFileTypesOptions2 = [
+  "txt",
+  "rtf",
+  "pdf",
+  "doc",
+  "docx",
+  "odt",
+  "ppt",
+  "pptx",
+  "odp",
+  "xls",
+  "xlsx",
+  "ods"
+] as const;
+
+const checkFileType = (file: File) => {
+  const extension = file.name.split('.').pop();
+  console.log(`Extensión del archivo 2: ${extension}`);
+
+  if (extension) {
+    const isValid = allowedFileTypesOptions.includes(extension as typeof allowedFileTypesOptions2[number]);
+    console.log(`Extensión respuesta: ${isValid}`);
+    return isValid;
+  } else {
+    console.log("No se pudo determinar la extensión del archivo.");
+    return false;
+  }
+};
+
 
 
 export const formularioSchema = z.object({
@@ -148,8 +179,17 @@ export const formularioSchema = z.object({
     .optional()
   ,
 
-  tipoDocumento: fileTypeValidation.optional(),
-  sizeDocument: fileSizeValidation.optional(),
+  pqrsFile: z
+    .instanceof(File)
+    .optional()
+    .refine((file) => {
+      return !file || file.size <= MAX_FILE_SIZE;
+    }, 'El tamaño del archivo debe ser menor de 3MB.')
+    .refine(file => {
+      return !file || checkFileType(file);
+    }, `Solo se admiten formatos: ${allowedFileTypesOptions.join(', ')}.`)
+  ,
+
 
   aceptaTerminos: z.boolean()
     .refine((val) => val === true, {

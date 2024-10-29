@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useForm } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { formularioSchema, FormularioData } from "../schemas/formularioSchema";
 import NaturalPerson from "./NaturalPerson";
@@ -16,10 +16,13 @@ import Population from "./Population";
 import Disability from "./Disability";
 const Formulario = () => {
   const [typePerson, setTipoPersona] = useState<string>("1");
+  const [selectedFile, setSelectedFile] = useState<File | null>(null); // Estado para almacenar el archivo
+
 
   const {
     register,
     handleSubmit,
+    setError,
     reset,
     watch,
     formState: { errors },
@@ -27,13 +30,19 @@ const Formulario = () => {
     resolver: zodResolver(formularioSchema),
   });
 
-  const onSubmit = (data: FormularioData) => {
+  const handleFileChange = (file: File | null) => {
+    setSelectedFile(file); // Actualizar el archivo seleccionado en el padre
+  };
+
+  const onSubmit: SubmitHandler<FormularioData> = (data) => {
     console.log("Llegó");
-    console.log("Datos del formulario:", data);
+    const formData = {
+      ...data, // Incluye todos los datos del formulario
+      pqrsFile: selectedFile, // Agrega el archivo
+    };
   
-    // Imprimir la longitud de los datos del formulario
-    const longitudDatos = Object.keys(data).length;
-    console.log("Longitud de los datos del formulario:", longitudDatos);
+    console.log("Datos del formulario con archivo:", formData); // Imprimir el objeto completo
+  
   };
 
   const handleTipoPersonaChange = (
@@ -53,6 +62,10 @@ const Formulario = () => {
     <>
       <div className="w-full flex items-center justify-center mb-9 px-8 lg:px-20 xl:px-96">
         <form className="w-full flex flex-col items-center justify-center  mx-auto" onSubmit={handleSubmit(onSubmit)}>
+
+        {/* <FileUploadComponent register={register} errors={errors}/> */}
+
+
           <TypeOfRequest register={register} errors={errors} />
 
           <ReasonRequest register={register} errors={errors} />
@@ -146,7 +159,7 @@ const Formulario = () => {
             </>
           )}
 
-          <FileUploadComponent />
+          <FileUploadComponent register={register} errors={errors} setError={setError} onFileChange={handleFileChange}/>
 
           {(typePerson == "1" || typePerson == "2") && (
             <>
