@@ -54,8 +54,8 @@ export const formularioSchema = z.object({
   ,
 
   lastName: z.string()
-    .min(1, "Nombre requerido")
-    .max(50, "Apellido demasiado largo")
+    .min(1, "Primer Apellido requerido")
+    .max(50, "Primer Apellido demasiado largo")
     .trim()
     .optional()
   ,
@@ -105,7 +105,7 @@ export const formularioSchema = z.object({
   ,
 
   emailAnonymous: z.string()
-    .optional() 
+    .optional()
     .refine((email) => {
       if (!email) return true; // Permite campo vacío si no es obligatorio
       return z.string().email().safeParse(email).success; // Valida solo si hay contenido y formato
@@ -114,11 +114,13 @@ export const formularioSchema = z.object({
     }),
 
   phoneNumber: z.string()
-    .regex(/^\d{10}$/, "Debe contener 10 dígitos")
-    .refine((telefono) => !isNaN(parseFloat(telefono)),
-      "El campo telefono debe ser un número."
-    )
     .optional()
+    .refine(
+      (telefono) => !telefono || (telefono.length === 10 && /^\d+$/.test(telefono)),
+      {
+        message: "Debe contener exactamente 10 dígitos y solo debe incluir números",
+      }
+    )
   ,
 
   descriptionPqrs: z.string()

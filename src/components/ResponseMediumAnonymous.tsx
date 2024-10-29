@@ -11,23 +11,25 @@ type ResponseMediumProps = {
 const ResponseMediumAnonymous = ({ register, errors }: ResponseMediumProps) => {
   return (
     <>
-      <div>
-        <h3>Medio de respuesta</h3>
+      <div className="mt-8 w-full border-2 border-gray-500 flex flex-col items-start justify-center gap-4 pb-3">
+        <h3 className="w-full bg-gray-500 text-white text-lg font-bold px-5 py-4">Medio de respuesta </h3>
         {responseMedium.map((option) => (
-          <div key={option.value}>
+          <div className="w-full flex items-center justify-start flex-nowrap gap-2 px-5" key={option.value}>
             <input
+              className="w-6 h-6 cursor-pointer"
               type="radio"
               id={option.id}
               value={option.value}
               {...register("responseMediumAnonymous")}
             />
-            <label htmlFor={option.id}>{option.label}</label>
+            <label className="font-bold cursor-pointer w-full" htmlFor={option.id}>{option.label}</label>
           </div>
         ))}
       </div>
-      <div>
-        <label htmlFor="idCorreo">Correo electrónico</label>
+      <div className="mt-8 w-full border-2 border-gray-500 flex flex-col items-start justify-center gap-4 pb-3">
+        <label className="w-full bg-gray-500 text-white text-lg font-bold px-5 py-4" htmlFor="idCorreo">Correo electrónico</label>
         <input
+          className="w-64 lg:w-[600px] px-5 h-10 ml-5 border-2 border-gray-600 rounded-md text-xl"
           id="idCorreo"
           {...register("emailAnonymous")}
           placeholder="Correo"

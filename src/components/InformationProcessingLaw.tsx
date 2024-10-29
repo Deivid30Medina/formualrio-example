@@ -1,8 +1,8 @@
 const InformationProcessingLaw = () => {
   return (
     <>
-      <div>
-        <h3>Autorización de tratamiento de información Ley 1581 de 2012</h3>
+      <div className="mt-8 w-full">
+        <h2 className="text-2xl font-semibold my-4">Autorización de tratamiento de información Ley 1581 de 2012</h2>
         <p>
           En aras de dar cumplimiento con lo contemplado en la Ley 1581 de 2012,
           por la cual se dictan disposiciones generales para la protección de
@@ -11,8 +11,7 @@ const InformationProcessingLaw = () => {
           que recopile, almacene, use y suprima los datos personales aquí
           suministrados, especialmente, aquellos que son definidos como Datos
           Sensibles (*).
-        </p>
-        <p>
+          <br /><br />
           La Dirección Nacional de Derecho de Autor para cumplir con su objetivo
           de prestar un servicio de alta calidad y ajustarse a las normas del
           derecho de Habeas Data, requiere realizar el "Tratamiento de Datos"
@@ -21,11 +20,11 @@ const InformationProcessingLaw = () => {
           administrativa e informativa. Bajo ninguna circunstancia se realizará
           Tratamiento de Datos personales con fines comerciales o circulación.
           En todo caso aplicarán las excepciones de ley.
-        </p>
-        <p>
+          <br /><br />
           En virtud del artículo 8 de la Ley 1581 de 2012, el titular de la
           información personal que es recopilada en este formulario, tiene los
           siguientes derechos:
+          <br /><br />
         </p>
         <ol>
           <li>
@@ -47,6 +46,7 @@ const InformationProcessingLaw = () => {
             objeto de tratamiento.
           </li>
         </ol>
+        <br />
         <p>
           El titular de la información suministrada, podrá ejercer cualquiera de
           los derechos mencionados, dirigiendo una petición en este sentido a la
@@ -55,14 +55,20 @@ const InformationProcessingLaw = () => {
             info@derechodeautor.gov.co
           </a>
         </p>
+        <br />
+        <p>
+          (*) Datos Sensibles: Aquellos que afectan la intimidad del Titular o cuyo uso indebido puede generar su discriminación.
+        </p>
+        <br />
         <p>
           En caso que la solicitud de información sea de naturaleza de identidad
           reservada, deberá efectuar el respectivo trámite ante la Procuraduría
           General de la Nación, haciendo clic en el siguiente link:
         </p>
-        <a href="https://www.procuraduria.gov.co/portal/solicitud_informacion_identificacion_reservada.page">
-          https://www.procuraduria.gov.co/portal/solicitud_informacion_identificacion_reservada.page
+        <a className="" href="https://www.procuraduria.gov.co/portal/solicitud_informacion_identificacion_reservada.page">
+          solicitud_informacion_identificacion_reservada
         </a>
+        <br /><br />
         <p>
           Autorizada la solicitud en los términos dispuestos por la Dirección
           Nacional de Derecho de Autor DNDA., se le dará trámite al

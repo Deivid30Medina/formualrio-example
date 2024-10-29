@@ -25,7 +25,14 @@ const useFileValidation = () => {
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
-    if (file) validateFile(file);
+
+    if (file) {
+      validateFile(file);
+    } else {
+      // Si el usuario canceló la selección, limpia el estado
+      setFileError(null);
+      setValidatedFile(null);
+    }
   };
 
   return { fileError, validatedFile, handleFileChange };
