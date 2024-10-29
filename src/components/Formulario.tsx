@@ -28,8 +28,12 @@ const Formulario = () => {
   });
 
   const onSubmit = (data: FormularioData) => {
-    console.log("Llego");
+    console.log("Llegó");
     console.log("Datos del formulario:", data);
+  
+    // Imprimir la longitud de los datos del formulario
+    const longitudDatos = Object.keys(data).length;
+    console.log("Longitud de los datos del formulario:", longitudDatos);
   };
 
   const handleTipoPersonaChange = (
