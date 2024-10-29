@@ -30,8 +30,6 @@ const Formulario = () => {
   const onSubmit = (data: FormularioData) => {
     console.log("Llego");
     console.log("Datos del formulario:", data);
-    console.log(errors);
-
   };
 
   const handleTipoPersonaChange = (
