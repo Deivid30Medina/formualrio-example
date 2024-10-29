@@ -11,7 +11,7 @@ type ResponseMediumProps = {
 const ResponseMediumAnonymous = ({ register, errors }: ResponseMediumProps) => {
   return (
     <>
-      <div className="mt-8 w-full border-2 border-gray-500 flex flex-col items-start justify-center gap-4 pb-3">
+      <div className={`mt-8 w-full border-2 flex flex-col items-start justify-center gap-4 pb-3 ${errors.emailAnonymous ? "border-red-500 bg-red-100" : "border-gray-500"}`}>
         <h3 className="w-full bg-gray-500 text-white text-lg font-bold px-5 py-4">Medio de respuesta </h3>
         {responseMedium.map((option) => (
           <div className="w-full flex items-center justify-start flex-nowrap gap-2 px-5" key={option.value}>
@@ -34,7 +34,7 @@ const ResponseMediumAnonymous = ({ register, errors }: ResponseMediumProps) => {
           {...register("emailAnonymous")}
           placeholder="Correo"
         />
-        {errors.emailAnonymous && <p>{errors.emailAnonymous.message}</p>}
+        {errors.emailAnonymous && <p className="px-5 text-red-600 font-bold animate-scale-infinite">{errors.emailAnonymous.message}</p>}
       </div>
     </>
   );

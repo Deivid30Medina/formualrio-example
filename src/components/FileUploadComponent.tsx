@@ -26,7 +26,7 @@ const FileUploadComponent = () => {
         xlsx, ods.
       </p>
       {fileError && <p style={{ color: "red" }}>{fileError}</p>}
-      {validatedFile && <p className="text-lg px-5">Archivo seleccionado: {validatedFile.name}</p>}
+      {validatedFile && <p className="text-lg px-5 text-red-600 font-bold animate-scale-infinite">Archivo seleccionado: {validatedFile.name}</p>}
     </div>
   );
 };

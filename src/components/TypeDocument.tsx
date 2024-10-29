@@ -10,7 +10,7 @@ type TypeDocumentProps = {
 
 const TypeDocument = ({ register, errors }: TypeDocumentProps) => {
   return (
-    <div className={`mt-8 w-full border-2 flex flex-col items-start justify-center gap-4 pb-3 ${errors.typeRequest ? "border-red-500 bg-red-100" : "border-gray-500"}`}>
+    <div className={`mt-8 w-full border-2 flex flex-col items-start justify-center gap-4 pb-3 ${errors.typeDocument ? "border-red-500 bg-red-100" : "border-gray-500"}`}>
       <h3 className="w-full bg-gray-500 text-white text-lg font-bold px-5 py-4">Tipo de Documento *</h3>
       {typeDocumentOptions.map((option) => (
         <div className="w-full flex items-center justify-start flex-nowrap gap-2 px-5" key={option.value}>

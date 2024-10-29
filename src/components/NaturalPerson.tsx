@@ -9,7 +9,7 @@ type NaturalPersonProps = {
 const NaturalPerson = ({ register, errors }: NaturalPersonProps) => {
   return (
     <>
-      <div className={`mt-8 w-full border-2 flex flex-col items-start justify-center gap-4 pb-3 ${errors.typeRequest ? "border-red-500 bg-red-100" : "border-gray-500"}`}>
+      <div className={`mt-8 w-full border-2 flex flex-col items-start justify-center gap-4 pb-3 ${(errors.name || errors.lastName) ? "border-red-500 bg-red-100" : "border-gray-500"}`}>
         <h3 className="w-full bg-gray-500 text-white text-lg font-bold px-5 py-4">Nombres y Apellidos *</h3>
 
         <div className="px-5 flex flex-col items-start justify-center">

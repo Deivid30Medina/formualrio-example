@@ -30,6 +30,8 @@ const Formulario = () => {
   const onSubmit = (data: FormularioData) => {
     console.log("Llego");
     console.log("Datos del formulario:", data);
+    console.log(errors);
+
   };
 
   const handleTipoPersonaChange = (
@@ -73,7 +75,7 @@ const Formulario = () => {
             <>
               <TypeDocument register={register} errors={errors} />
 
-              <div className={`mt-8 w-full border-2 flex flex-col items-start justify-center gap-4 pb-3 ${errors.typeRequest ? "border-red-500 bg-red-100" : "border-gray-500"}`}>
+              <div className={`mt-8 w-full border-2 flex flex-col items-start justify-center gap-4 pb-3 ${errors.numberDocument ? "border-red-500 bg-red-100" : "border-gray-500"}`}>
               <label className="w-full bg-gray-500 text-white text-lg font-bold px-5 py-4" htmlFor="numberDocument">Número de documento *</label>
                 <input
                   className="px-5 w-64 lg:w-[600px] h-10 ml-5 border-2 border-gray-600 rounded-md text-xl"
@@ -119,7 +121,7 @@ const Formulario = () => {
               </div>
             </>
           )}
-          <div className={`mt-8 w-full border-2 flex flex-col items-start justify-center gap-4 pb-8 px-5 relative ${errors.typeRequest ? "border-red-500 bg-red-100" : "border-gray-500"}`}>
+          <div className={`mt-8 w-full border-2 flex flex-col items-start justify-center gap-4 pb-8 px-5 relative ${errors.descriptionPqrs ? "border-red-500 bg-red-100" : "border-gray-500"}`}>
             <label className="w-full bg-gray-500 text-white text-lg font-bold px-5 py-4 absolute top-0 left-0" htmlFor="idDescriptionPqrs">
               Espacio para describir su PQRSD *
             </label>
@@ -134,7 +136,7 @@ const Formulario = () => {
 
           {typePerson == "1" && (
             <>
-              <div className={`relative mt-8 w-full border-2 flex flex-col items-start justify-center gap-4 pb-3 pt-20 px-5 ${errors.typeRequest ? "border-red-500 bg-red-100" : "border-gray-500"}`}>
+              <div className={`relative mt-8 w-full border-2 flex flex-col items-start justify-center gap-4 pb-3 pt-20 px-5 ${(errors.typePopulation || errors.typeDisability)  ? "border-red-500 bg-red-100" : "border-gray-500"}`}>
                 <h3 className="absolute left-0 top-0 w-full bg-gray-500 text-white text-lg font-bold px-5 py-4">Caracterización ciudadana *</h3>
                 <Population register={register} errors={errors} />
                 <Disability register={register} errors={errors} />
