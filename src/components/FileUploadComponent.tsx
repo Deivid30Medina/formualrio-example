@@ -17,7 +17,7 @@ const FileUploadComponent = () => {
         onChange={handleFileChange}
         accept={allowedFileTypesOptions.map((ext) => `.${ext}`).join(", ")}
       />
-      <p lassName="text-lg px-5 text-red-600 font-bold animate-scale-infinite">
+      <p className="text-lg px-5 text-red-600 font-bold animate-scale-infinite">
         Máximo 1 fichero.
         <br />
         límite de 100 MB.
