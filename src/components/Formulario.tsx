@@ -42,7 +42,6 @@ const Formulario = () => {
     };
   
     console.log("Datos del formulario con archivo:", formData); // Imprimir el objeto completo
-  
   };
 
   const handleTipoPersonaChange = (
