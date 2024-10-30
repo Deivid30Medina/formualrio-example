@@ -14,9 +14,14 @@ import InformationProcessingLaw from "./InformationProcessingLaw";
 import ResponseMediumAnonymous from "./ResponseMediumAnonymous";
 import Population from "./Population";
 import Disability from "./Disability";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
+import { useRequest } from "../hooks/useRequest";
 const Formulario = () => {
   const [typePerson, setTipoPersona] = useState<string>("1");
-  const [selectedFile, setSelectedFile] = useState<File | null>(null); // Estado para almacenar el archivo
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const { sendRequest, loading } = useRequest();
+  const navigate = useNavigate();
 
 
   const {
@@ -34,14 +39,43 @@ const Formulario = () => {
     setSelectedFile(file); // Actualizar el archivo seleccionado en el padre
   };
 
-  const onSubmit: SubmitHandler<FormularioData> = (data) => {
-    console.log("Llegó");
-    const formData = {
-      ...data, // Incluye todos los datos del formulario
-      pqrsFile: selectedFile, // Agrega el archivo
-    };
+  // Función para construir el FormData
+  const createFormData = (data: FormularioData): FormData => {
+    const formData = new FormData();
+    Object.entries(data).forEach(([key, value]) => {
+      formData.append(key, value as string);
+    });
+    if (selectedFile) formData.append("pqrsFile", selectedFile);
+    return formData;
+  };
 
-    console.log("Datos del formulario con archivo:", formData); // Imprimir el objeto completo
+  // Función para mostrar el mensaje de carga
+  const showLoadingMessage = () => {
+    Swal.fire({
+      title: "Enviando...",
+      text: "Por favor, espera mientras enviamos tu solicitud.",
+      allowOutsideClick: false,
+      didOpen: () => Swal.showLoading(),
+    });
+  };
+
+  // Función para mostrar el mensaje de resultado
+  const showResultMessage = (response: { success: boolean; message: string }) => {
+    Swal.close();
+    if (response.success) {
+      Swal.fire("¡Éxito!", response.message, "success").then(() => {
+        navigate("/create", { state: { message: response.message } });
+      });
+    } else {
+      Swal.fire("Error", response.message, "error");
+    }
+  };
+
+  const onSubmit: SubmitHandler<FormularioData> = async (data) => {
+    const formData = createFormData(data);
+    showLoadingMessage();
+    const response = await sendRequest(formData);
+    showResultMessage(response);
   };
 
   const handleTipoPersonaChange = (
@@ -59,6 +93,8 @@ const Formulario = () => {
 
   return (
     <>
+      <h1 className="text-center w-full mt-12 mb-5 text-4xl">Formulario PQRSD DNDA</h1>
+      <h4 className="text-center w-full mb-11 text-xl">Recuerde que los campos con * son obligatorios</h4>
       <div className="w-full flex items-center justify-center mb-9 px-8 lg:px-20 xl:px-96">
         <form className="w-full flex flex-col items-center justify-center  mx-auto" onSubmit={handleSubmit(onSubmit)}>
 
@@ -181,7 +217,9 @@ const Formulario = () => {
             </>
           )}
 
-          <button className="text-white bg-color-dnda-oscuro w-36 h-10 rounded-md mt-8 hover:bg-color-dnda" type="submit">Enviar</button>
+          <button className="text-white bg-color-dnda-oscuro w-36 h-10 rounded-md mt-8 hover:bg-color-dnda" type="submit" disabled={loading}>
+            {loading ? "Enviando..." : "Enviar"}
+          </button>
           {/* Mostrar todos los errores */}
           {/* {Object.keys(errors).length > 0 && (
             <p className="px-5 w-full text-red-600 font-bold">

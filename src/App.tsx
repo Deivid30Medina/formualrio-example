@@ -1,12 +1,15 @@
+import { Route, Routes } from "react-router-dom"
 import Formulario from "./components/Formulario"
+import Anwser from "./pages/Anwser"
 
 function App() {
 
   return (
     <>
-      <h1 className="text-center w-full mt-12 mb-5 text-4xl">Formulario PQRSD DNDA</h1>
-      <h4 className="text-center w-full mb-11 text-xl">Recuerde que los campos con * son obligatorios</h4>
-      <Formulario />
+      <Routes>
+        <Route path="/pqrs-dnda/" element={<Formulario />} />
+        <Route path="/create" element={<Anwser />} /> 
+      </Routes>
     </>
   )
 }
