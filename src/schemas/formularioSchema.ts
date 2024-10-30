@@ -137,16 +137,21 @@ export const formularioSchema = z.object({
     .nullable()
     .optional(),
 
-  emailAnonymous: z.string()
+  emailAnonymous: z
+    .string()
     .trim()
     .optional()
-    .refine((emailAnonymous) => {
-      if (!emailAnonymous) return true;
-      return z.string().email().safeParse(emailAnonymous).success;
-    }, {
-      message: "Por favor escriba un email válido.",
-    }),
-
+    .nullable()
+    .refine(
+      (emailAnonymous) => {
+        // Solo valida si `emailAnonymous` tiene contenido
+        return !emailAnonymous || z.string().email().safeParse(emailAnonymous).success;
+      },
+      {
+        message: "Por favor, escribe un correo electrónico válido.",
+      }
+    ),
+    
   phoneNumber: z.string()
     .trim()
     .optional()
@@ -186,6 +191,7 @@ export const formularioSchema = z.object({
   pqrsFile: z
     .instanceof(File)
     .optional()
+    .nullable()
     .refine((file) => {
       return !file || file.size <= MAX_FILE_SIZE;
     }, 'El tamaño del archivo debe ser menor de 3MB.')
@@ -200,6 +206,7 @@ export const formularioSchema = z.object({
       message: "Debes aceptar los términos del servicio.",
     })
     .optional()
+    .nullable()
   ,
 
 })
