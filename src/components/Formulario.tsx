@@ -72,7 +72,7 @@ const Formulario = () => {
         "Su número de radicado es: " + response.numberPqrs,
         "success"
       ).then(() => {
-        navigate("/create", { state: { message: response.numberPqrs } });
+        // navigate("/create", { state: { message: response.numberPqrs } });
       });
     } else {
       Swal.fire("Error", response.numberPqrs, "error");
