@@ -21,11 +21,11 @@ export const useRequest = () => {
             });
 
             // Enviar solicitud con Axios
-            const response = await axios.post("https://localhost:44316/api/v1/dnda/pqrs-management", formData, {
-                headers: {
-                    "Content-Type": "multipart/form-data",  // Axios lo establece automáticamente
-                },
-            });
+            // const response = await axios.post("https://localhost:44316/api/v1/dnda/pqrs-management", formData, {
+            //     headers: {
+            //         "Content-Type": "multipart/form-data",  // Axios lo establece automáticamente
+            //     },
+            // });
 
             setLoading(false);
 
