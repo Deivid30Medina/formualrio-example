@@ -1,4 +1,3 @@
-// Importa Axios
 import axios, { AxiosError } from "axios";
 import { useState } from "react";
 
@@ -7,25 +6,20 @@ interface PqrsErrorResponse {
     numberPqrs: string;
 }
 
-
 export const useRequest = () => {
     const [loading, setLoading] = useState(false);
 
     const sendRequest = async (data: FormData): Promise<PqrsErrorResponse> => {
         setLoading(true);
+        
         try {
-            // Crea un nuevo FormData y añade los pares clave-valor
-            const formData = new FormData();
+            // Mostrar el contenido de FormData en consola
             data.forEach((value, key) => {
-                formData.append(key, value);
+                console.log(`${key}:${value}`);
             });
 
-            // Enviar solicitud con Axios
-            // const response = await axios.post("https://localhost:44316/api/v1/dnda/pqrs-management", formData, {
-            //     headers: {
-            //         "Content-Type": "multipart/form-data",  // Axios lo establece automáticamente
-            //     },
-            // });
+            // Enviar solicitud con Axios sin especificar el encabezado Content-Type
+            const response = await axios.post("https://localhost:44316/api/v1/dnda/pqrs-management", data);
 
             setLoading(false);
 
@@ -37,7 +31,7 @@ export const useRequest = () => {
         } catch (error: unknown) {
             console.error("Error:", error);
 
-            const axiosError = error as AxiosError<PqrsErrorResponse>; // Asegúrate de usar la interfaz aquí
+            const axiosError = error as AxiosError<PqrsErrorResponse>;
 
             const errorMessage = axiosError.response && axiosError.response.data && axiosError.response.data.numberPqrs
                 ? `Error en la solicitud: ${axiosError.response.data.numberPqrs}`
@@ -49,10 +43,7 @@ export const useRequest = () => {
                 numberPqrs: errorMessage,
             };
         }
-
-
-
-    }
+    };
 
     return { sendRequest, loading };
 };

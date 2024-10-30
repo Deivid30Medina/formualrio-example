@@ -6,7 +6,6 @@ interface CaptchaProps {
 
 const Captcha = ({ onCaptchaChange }: CaptchaProps) => {
   const onChange = (value: string | null) => {
-    console.log("Captcha value:", value);
     onCaptchaChange(value);
   };
 
