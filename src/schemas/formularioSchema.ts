@@ -72,8 +72,9 @@ export const formularioSchema = z.object({
   ,
 
   numberDocument: z.string()
-    .min(5, "Mínimo debe ser 5 dígitos")
-    .max(15, "Máximo debe ser 15 dígitos")
+    .min(5, "Longitud mínima de 5")
+    .max(15, "Longitud máxima de 15")
+    .trim()
     .optional()
   ,
 
@@ -95,6 +96,7 @@ export const formularioSchema = z.object({
     .max(50, "Segundo apellido demasiado largo")
     .trim()
     .optional()
+    .nullable()
   ,
 
   nit: z.string()
@@ -126,25 +128,27 @@ export const formularioSchema = z.object({
   email: z.string().email(
     "Por favor escriba un email valido."
   )
+    .trim()
     .optional()
   ,
 
-  responseMediumAnonymous: z.enum(
-    responseMedium.map(option => option.value) as [string, ...string[]],
-  )
-    .optional()
-  ,
+  responseMediumAnonymous: z
+    .enum(responseMedium.map(option => option.value) as [string, ...string[]])
+    .nullable()
+    .optional(),
 
   emailAnonymous: z.string()
+    .trim()
     .optional()
-    .refine((email) => {
-      if (!email) return true; // Permite campo vacío si no es obligatorio
-      return z.string().email().safeParse(email).success; // Valida solo si hay contenido y formato
+    .refine((emailAnonymous) => {
+      if (!emailAnonymous) return true;
+      return z.string().email().safeParse(emailAnonymous).success;
     }, {
       message: "Por favor escriba un email válido.",
     }),
 
   phoneNumber: z.string()
+    .trim()
     .optional()
     .refine(
       (telefono) => !telefono || (telefono.length === 10 && /^\d+$/.test(telefono)),

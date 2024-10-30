@@ -1,10 +1,9 @@
 import { useState } from "react";
 import { allowedFileTypesOptions } from "../utils/allowedFileTypesOptions";
 import { FormularioData } from "../schemas/formularioSchema";
-import { FieldErrors, UseFormRegister, UseFormSetError } from "react-hook-form";
+import { FieldErrors, UseFormSetError } from "react-hook-form";
 
 type FileProps = {
-  register: UseFormRegister<FormularioData>;
   errors: FieldErrors<FormularioData>;
   setError: UseFormSetError<FormularioData>;
   onFileChange: (file: File | null) => void;
@@ -12,7 +11,7 @@ type FileProps = {
 
 const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB en bytes
 
-const FileUploadComponent = ({ register, errors, setError, onFileChange }: FileProps) => {
+const FileUploadComponent = ({ errors, setError, onFileChange }: FileProps) => {
   const [file, setFile] = useState<File | null>(null);
   const [isFileTypeValid, setIsFileTypeValid] = useState<boolean>(true); // Estado para validar tipo de archivo
 
@@ -84,7 +83,7 @@ const FileUploadComponent = ({ register, errors, setError, onFileChange }: FileP
         <br />
         Tipos permitidos: {allowedFileTypesOptions.join(", ")}.
       </p>
-      {file && isFileTypeValid && ( // Mostrar mensaje de éxito solo si el archivo es válido
+      {file && isFileTypeValid && ( 
         <p className="text-lg px-5 text-green-600 font-bold animate-scale-infinite">
           Archivo seleccionado: {file.name}
         </p>

@@ -40,7 +40,7 @@ const Formulario = () => {
       ...data, // Incluye todos los datos del formulario
       pqrsFile: selectedFile, // Agrega el archivo
     };
-  
+
     console.log("Datos del formulario con archivo:", formData); // Imprimir el objeto completo
   };
 
@@ -62,7 +62,7 @@ const Formulario = () => {
       <div className="w-full flex items-center justify-center mb-9 px-8 lg:px-20 xl:px-96">
         <form className="w-full flex flex-col items-center justify-center  mx-auto" onSubmit={handleSubmit(onSubmit)}>
 
-        {/* <FileUploadComponent register={register} errors={errors}/> */}
+          {/* <FileUploadComponent register={register} errors={errors}/> */}
 
 
           <TypeOfRequest register={register} errors={errors} />
@@ -90,7 +90,7 @@ const Formulario = () => {
               <TypeDocument register={register} errors={errors} />
 
               <div className={`mt-8 w-full border-2 flex flex-col items-start justify-center gap-4 pb-3 ${errors.numberDocument ? "border-red-500 bg-red-100" : "border-gray-500"}`}>
-              <label className="w-full bg-gray-500 text-white text-lg font-bold px-5 py-4" htmlFor="numberDocument">Número de documento *</label>
+                <label className="w-full bg-gray-500 text-white text-lg font-bold px-5 py-4" htmlFor="numberDocument">Número de documento *</label>
                 <input
                   className="px-5 w-64 lg:w-[600px] h-10 ml-5 border-2 border-gray-600 rounded-md text-xl"
                   id="numberDocument"
@@ -150,7 +150,7 @@ const Formulario = () => {
 
           {typePerson == "1" && (
             <>
-              <div className={`relative mt-8 w-full border-2 flex flex-col items-start justify-center gap-4 pb-3 pt-20 px-5 ${(errors.typePopulation || errors.typeDisability)  ? "border-red-500 bg-red-100" : "border-gray-500"}`}>
+              <div className={`relative mt-8 w-full border-2 flex flex-col items-start justify-center gap-4 pb-3 pt-20 px-5 ${(errors.typePopulation || errors.typeDisability) ? "border-red-500 bg-red-100" : "border-gray-500"}`}>
                 <h3 className="absolute left-0 top-0 w-full bg-gray-500 text-white text-lg font-bold px-5 py-4">Caracterización ciudadana *</h3>
                 <Population register={register} errors={errors} />
                 <Disability register={register} errors={errors} />
@@ -158,7 +158,7 @@ const Formulario = () => {
             </>
           )}
 
-          <FileUploadComponent register={register} errors={errors} setError={setError} onFileChange={handleFileChange}/>
+          <FileUploadComponent errors={errors} setError={setError} onFileChange={handleFileChange} />
 
           {(typePerson == "1" || typePerson == "2") && (
             <>
@@ -182,6 +182,12 @@ const Formulario = () => {
           )}
 
           <button className="text-white bg-color-dnda-oscuro w-36 h-10 rounded-md mt-8 hover:bg-color-dnda" type="submit">Enviar</button>
+          {/* Mostrar todos los errores */}
+          {/* {Object.keys(errors).length > 0 && (
+            <p className="px-5 w-full text-red-600 font-bold">
+              {Object.values(errors).map((error) => error.message).join(", ")}
+            </p>
+          )} */}
         </form>
       </div>
     </>
