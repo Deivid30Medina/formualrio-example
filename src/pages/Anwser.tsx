@@ -8,7 +8,7 @@ const Anwser = () => {
 
     const handleGoBack = () => {
         // Navegar a la ruta y pasar un mensaje
-        navigate("/pqrs-dnda");
+        navigate("/pqrs-dnda/");
     };
 
     return (

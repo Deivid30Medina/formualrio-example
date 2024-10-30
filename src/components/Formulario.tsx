@@ -60,14 +60,14 @@ const Formulario = () => {
   };
 
   // Función para mostrar el mensaje de resultado
-  const showResultMessage = (response: { success: boolean; message: string }) => {
+  const showResultMessage = (response: { create: boolean; numberPqrs: string }) => {
     Swal.close();
-    if (response.success) {
-      Swal.fire("¡Éxito!", response.message, "success").then(() => {
-        navigate("/create", { state: { message: response.message } });
+    if (response.create) {
+      Swal.fire("¡Radicado creado con éxito!", "Su número de radicado es: " + response.numberPqrs, "success").then(() => {
+        navigate("/create", { state: { message: response.numberPqrs } });
       });
     } else {
-      Swal.fire("Error", response.message, "error");
+      Swal.fire("Error", response.numberPqrs, "error");
     }
   };
 

@@ -26,8 +26,8 @@ const InformationProcessingLaw = () => {
           siguientes derechos:
           <br /><br />
         </p>
-        <ol>
-          <li>
+        <ol className="list-decimal list-inside">
+        <li>
             Conocer, actualizar, rectificar y suprimir los datos personales
             suministrados.
           </li>
