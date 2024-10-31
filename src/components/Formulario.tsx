@@ -2,28 +2,28 @@ import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { formularioSchema, FormularioData } from "../schemas/formularioSchema";
-import NaturalPerson from "./NaturalPerson";
-import LegalPerson from "./LegalPerson";
-import TypeOfRequest from "./TypeOfRequest ";
 import { typePersonOptions } from "../utils/typePersonOptions";
-import ReasonRequest from "./ReasonRequest";
-import FileUploadComponent from "./FileUploadComponent";
-import InformationProcessingLaw from "./InformationProcessingLaw";
-import ResponseMediumAnonymous from "./ResponseMediumAnonymous";
+import InformationProcessingLaw from "./ShareForm/InformationProcessingLaw";
 import Swal from "sweetalert2";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import { useRequest } from "../hooks/useRequest";
-import Captcha from "./Captcha";
-import PhoneNumber from "./PhoneNumber";
-import DescriptionPqrs from "./DescriptionPqrs";
-import CitizenCharacterization from "./CitizenCharacterization";
-import TermsAndService from "./TermsAndService";
+import Captcha from "./GlobalForm/Captcha";
+import CitizenCharacterization from "./NaturalPeople/CitizenCharacterization";
+import TypeOfRequest from "./GlobalForm/TypeOfRequest ";
+import ReasonRequest from "./GlobalForm/ReasonRequest";
+import NaturalPerson from "./NaturalPeople/NaturalPerson";
+import LegalPerson from "./LegalPeople/LegalPerson";
+import ResponseMediumAnonymous from "./AnonymousPeople/ResponseMediumAnonymous";
+import PhoneNumber from "./NaturalPeople/PhoneNumber";
+import DescriptionPqrs from "./GlobalForm/DescriptionPqrs";
+import FileUploadComponent from "./GlobalForm/FileUploadComponent";
+import TermsAndService from "./ShareForm/TermsAndService";
 const Formulario = () => {
   const [typePerson, setTipoPersona] = useState<string>("1");
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const { sendRequest, loading } = useRequest();
   const [captchaToken, setCaptchaToken] = useState<string | null>(null);
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const {
     register,
@@ -82,7 +82,7 @@ const Formulario = () => {
   const onSubmit: SubmitHandler<FormularioData> = async (data) => {
     if (!captchaToken) {
       console.error("Captcha not completed");
-      return; 
+      return;
     }
 
     const formData = createFormData(data);
@@ -163,15 +163,15 @@ const Formulario = () => {
 
           {typePerson == "1" && (
             <>
-              <PhoneNumber register={register} errors={errors}/>
+              <PhoneNumber register={register} errors={errors} />
             </>
           )}
 
-          <DescriptionPqrs register={register} errors={errors}/>
+          <DescriptionPqrs register={register} errors={errors} />
 
           {typePerson == "1" && (
             <>
-              <CitizenCharacterization register={register} errors={errors}/>
+              <CitizenCharacterization register={register} errors={errors} />
             </>
           )}
 
@@ -184,8 +184,8 @@ const Formulario = () => {
           {(typePerson == "1" || typePerson == "2") && (
             <>
               <InformationProcessingLaw />
-              
-              <TermsAndService register={register} errors={errors}/>
+
+              <TermsAndService register={register} errors={errors} />
             </>
           )}
 
@@ -200,12 +200,13 @@ const Formulario = () => {
           >
             {loading ? "Enviando..." : "Enviar"}
           </button>
+          
           {/* Mostrar todos los errores */}
-          {Object.keys(errors).length > 0 && (
+          {/* {Object.keys(errors).length > 0 && (
             <p className="px-5 w-full text-red-600 font-bold">
               {Object.values(errors).map((error) => error.message).join(", ")}
             </p>
-          )}
+          )} */}
         </form>
       </div>
     </>

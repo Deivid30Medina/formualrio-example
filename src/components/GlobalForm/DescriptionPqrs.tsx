@@ -1,5 +1,5 @@
 import { UseFormRegister, FieldErrors } from "react-hook-form";
-import { FormularioData } from "../schemas/formularioSchema";
+import { FormularioData } from "../../schemas/formularioSchema";
 
 type DescriptionPqrsProps = {
   register: UseFormRegister<FormularioData>;

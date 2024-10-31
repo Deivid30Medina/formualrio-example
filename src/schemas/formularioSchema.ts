@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { requestOptions, reasonForRequestOptions, typeDocumentOptions, responseMedium, populationOptions, disabilityOptions, typePersonOptions, allowedFileTypesOptions } from "../utils/indexOptions";
+import { requestOptions, reasonForRequestOptions, typeDocumentOptions, populationOptions, disabilityOptions, typePersonOptions, allowedFileTypesOptions, responseMediumOptions } from "../utils/indexOptions";
 
 const MAX_FILE_SIZE = 100 * 1024 * 1024;
 
@@ -117,7 +117,7 @@ export const formularioSchema = z.object({
   ,
 
   responseMedium: z.enum(
-    responseMedium.map(option => option.value) as [string, ...string[]],
+    responseMediumOptions.map(option => option.value) as [string, ...string[]],
     {
       errorMap: () => ({ message: "El medio de respuesta es requerido" }),
     }
@@ -133,7 +133,7 @@ export const formularioSchema = z.object({
   ,
 
   responseMediumAnonymous: z
-    .enum(responseMedium.map(option => option.value) as [string, ...string[]])
+    .enum(responseMediumOptions.map(option => option.value) as [string, ...string[]])
     .nullable()
     .optional(),
 

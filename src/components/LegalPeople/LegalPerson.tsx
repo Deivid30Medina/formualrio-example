@@ -1,7 +1,8 @@
 import { UseFormRegister, FieldErrors } from "react-hook-form";
-import { FormularioData } from "../schemas/formularioSchema";
-import ResponseMedium from "./ResponseMedium";
+import { FormularioData } from "../../schemas/formularioSchema";
 import NitAndBusinnesName from "./NitAndBusinnesName";
+import ResponseMedium from "../ShareForm/ResponseMedium";
+
 
 type LegalPersonProps = {
     register: UseFormRegister<FormularioData>;

@@ -1,7 +1,7 @@
 // TypeOfRequest.tsx
 import { UseFormRegister, FieldErrors } from "react-hook-form";
-import { FormularioData } from "../schemas/formularioSchema";
-import { disabilityOptions } from "../utils/disabilityOptions";
+import { FormularioData } from "../../schemas/formularioSchema";
+import { disabilityOptions } from "../../utils/disabilityOptions";
 
 type ReasonRequestProps = {
   register: UseFormRegister<FormularioData>;

@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { allowedFileTypesOptions } from "../utils/allowedFileTypesOptions";
-import { FormularioData } from "../schemas/formularioSchema";
+import { FormularioData } from "../../schemas/formularioSchema";
 import { FieldErrors, UseFormSetError } from "react-hook-form";
+import { allowedFileTypesOptions } from "../../utils/allowedFileTypesOptions";
 
 type FileProps = {
   errors: FieldErrors<FormularioData>;

@@ -1,7 +1,7 @@
 import { UseFormRegister, FieldErrors } from "react-hook-form";
-import { FormularioData } from "../schemas/formularioSchema";
-import Population from "./Population";
+import { FormularioData } from "../../schemas/formularioSchema";
 import Disability from "./Disability";
+import Population from "./Population";
 
 type CitizenCharacterizationProps = {
   register: UseFormRegister<FormularioData>;

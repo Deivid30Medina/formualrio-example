@@ -1,7 +1,8 @@
 // TypeOfRequest.tsx
 import { UseFormRegister, FieldErrors } from "react-hook-form";
-import { FormularioData } from "../schemas/formularioSchema";
-import { populationOptions } from "../utils/populationOptions";
+import { FormularioData } from "../../schemas/formularioSchema";
+import { populationOptions } from "../../utils/populationOptions";
+
 
 type ReasonRequestProps = {
   register: UseFormRegister<FormularioData>;
