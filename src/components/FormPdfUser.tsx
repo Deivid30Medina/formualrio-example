@@ -72,9 +72,13 @@ const FormPdfUser: React.FC<FormPdfUserProps> = ({ formData, selectFile }) => {
     >
       <Image
         src="assets/icons/LogoDNDA-Color.png"
-        style={{ marginLeft: "auto",marginRight: "auto", width: "auto", height: 100 }}
+        style={{
+          marginLeft: "auto",
+          marginRight: "auto",
+          width: "auto",
+          height: 100,
+        }}
       />
-
     </View>
   );
 
@@ -104,14 +108,20 @@ const FormPdfUser: React.FC<FormPdfUserProps> = ({ formData, selectFile }) => {
         <Header />
         <View>
           <Text style={{ fontSize: 24, marginBottom: 20 }}>
-            <strong>Formulario PQRSD DNDA</strong>
+            Formulario PQRSD DNDA
           </Text>
           <Text style={{ fontSize: 18 }}>
-            Tipo de Solicitud: {getRequestLabel(formData.typeRequest)}
+            <Text style={{ fontWeight: "bold" }}>Tipo de Solicitud: </Text>
+            {getRequestLabel(formData.typeRequest)}
           </Text>
           <Text style={{ fontSize: 18 }}>
-            Motivo de la solicitud:{" "}
+            <Text style={{ fontWeight: 700 }}>
+              Motivo de la solicitud:{" "}
+            </Text>
             {getReasonRequestLabel(formData.reasonRequest)}
+          </Text>
+          <Text style={{ color: "red", fontSize: 18 }}>
+            Motivo de la solicitud:
           </Text>
           <Text style={{ fontSize: 18 }}>
             Tipo de persona: {getTypePersonOptions(formData.typePerson)}
