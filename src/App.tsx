@@ -7,7 +7,7 @@ function App() {
   return (
     <>
       <Routes>
-        <Route path="/pqrs-dnda/" element={<Formulario />} />
+        <Route path="/pqrsd-dnda/" element={<Formulario />} />
         <Route path="/create" element={<Anwser />} /> 
       </Routes>
     </>
