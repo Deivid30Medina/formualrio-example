@@ -18,6 +18,10 @@ import PhoneNumber from "./NaturalPeople/PhoneNumber";
 import DescriptionPqrs from "./GlobalForm/DescriptionPqrs";
 import FileUploadComponent from "./GlobalForm/FileUploadComponent";
 import TermsAndService from "./ShareForm/TermsAndService";
+import FormPdfUser from "./FormPdfUser";
+import { pdf } from "@react-pdf/renderer";
+import { PqrsFormData } from "../interfaces/PqrsFormData";
+
 const Formulario = () => {
   const [typePerson, setTipoPersona] = useState<string>("1");
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
@@ -41,12 +45,18 @@ const Formulario = () => {
   };
 
   // Función para construir el FormData
-  const createFormData = (data: FormularioData): FormData => {
+  const createFormData = async (data: FormularioData): Promise<FormData> => {
     const formData = new FormData();
     Object.entries(data).forEach(([key, value]) => {
       formData.append(key, value as string);
     });
-    if (selectedFile) formData.append("pqrsFile", selectedFile);
+    // if (selectedFile) formData.append("pqrsFile", selectedFile);
+
+    //Creando pdf del formulario diligenciado por el usuario
+    console.log("Antes de enviar a blob: " + selectedFile?.name)
+    const pdfBlob = await createPdfBlob(data, selectedFile);
+
+    formData.append("pqrsFile", pdfBlob, "FormUser.pdf");
     return formData;
   };
 
@@ -67,16 +77,30 @@ const Formulario = () => {
   }) => {
     Swal.close();
     if (response.create) {
-      Swal.fire(
-        "¡Radicado creado con éxito!",
-        "Su número de radicado es: " + response.numberPqrs,
-        "success"
-      ).then(() => {
-        // navigate("/create", { state: { message: response.numberPqrs } });
+      Swal.fire({
+        title: "Solicitud radicada con éxito!",
+        html: `Su número de radicado es: <strong>${response.numberPqrs}</strong>.<br>
+        Para hacerle seguimiento a esta solicitud, por favor dar clic en este enlace
+        <a style="color: #002552; text-decoration: underline;" href="https://apps.derechodeautor.gov.co/consultar-radicados/" target="_blank" rel="noopener noreferrer">ESTADO DE TRÁMITE</a>.`,
+        icon: "success",
+      }).then(() => {
+        // Puedes redirigir o realizar alguna otra acción si lo necesitas
       });
     } else {
       Swal.fire("Error", response.numberPqrs, "error");
     }
+  };
+
+  // Función para crear el Blob del PDF
+  const createPdfBlob = async (
+    data: PqrsFormData,
+    selectedFile: File | null
+  ): Promise<Blob> => {
+    // Aquí estás pasando el objeto de propiedades a FormPdfUser
+    const pdfBlob = await pdf(
+      <FormPdfUser formData={data} selectFile={selectedFile} />
+    ).toBlob();
+    return pdfBlob;
   };
 
   const onSubmit: SubmitHandler<FormularioData> = async (data) => {
@@ -85,7 +109,11 @@ const Formulario = () => {
       return;
     }
 
-    const formData = createFormData(data);
+    // Object.entries(data).forEach(([key, value]) => {
+    //   console.log(`Campo: ${key}, Tipo de dato: ${typeof value}, Valor: ${value}`);
+    // });
+
+    const formData = await createFormData(data);
     showLoadingMessage();
     const response = await sendRequest(formData);
     showResultMessage(response);
@@ -200,7 +228,7 @@ const Formulario = () => {
           >
             {loading ? "Enviando..." : "Enviar"}
           </button>
-          
+
           {/* Mostrar todos los errores */}
           {/* {Object.keys(errors).length > 0 && (
             <p className="px-5 w-full text-red-600 font-bold">

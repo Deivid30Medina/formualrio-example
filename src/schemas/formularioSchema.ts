@@ -41,7 +41,6 @@ export const formularioSchema = z.object({
       errorMap: () => ({ message: "Tipo de solicitud es requerido" }),
     }
   )
-    .optional()
   ,
 
   reasonRequest: z.enum(
@@ -50,7 +49,6 @@ export const formularioSchema = z.object({
       errorMap: () => ({ message: "Motivo de la solicitud es requerido" }),
     }
   )
-    .optional()
   ,
 
   typePerson: z.enum(
