@@ -21,7 +21,7 @@ const NumberDocument = ({ register, errors }: NumberDocumentProps) => {
         Número de documento *
       </label>
       <input
-        className="px-5 w-64 lg:w-[600px] h-10 ml-5 border-2 border-gray-600 rounded-md text-xl"
+        className="px-5 w-64 lg:w-[600px] xl:w-96 h-10 ml-5 border-2 border-gray-600 rounded-md text-xl"
         id="numberDocument"
         {...register("numberDocument")}
         placeholder="Número Documento"

@@ -13,12 +13,12 @@ const NitAndBusinnesName = ({ register, errors }: NitAndBusinnesNameProps) => {
                 <h3 className="w-full bg-gray-500 text-white text-lg font-bold px-5 py-4">Nit y Razón sociual *</h3>
                 <div className="px-5 flex flex-col items-start justify-center">
                     <label htmlFor="nit" className="text-lg">NIT *</label>
-                    <input className="w-64 px-5 border-2 h-14 lg:w-[600px] border-gray-400 rounded-md text-xl" id="nit" {...register("nit")} placeholder="NIT" />
+                    <input className="w-64 xl:w-96 px-5 border-2 h-14 lg:w-[600px] border-gray-400 rounded-md text-xl" id="nit" {...register("nit")} placeholder="NIT" />
                     {errors.nit && <p className="px-5 text-red-600 font-bold animate-scale-infinite">{errors.nit.message}</p>}
                 </div>
                 <div className="px-5 flex flex-col items-start justify-center">
                     <label className="text-lg" htmlFor="razonSocial">Razón Social *</label>
-                    <input className="w-64 px-5 border-2 h-14 lg:w-[600px] border-gray-400 rounded-md text-xl" id="razonSocial" {...register("razonSocial")} placeholder="Razón Social" />
+                    <input className="w-64 xl:w-96 px-5 border-2 h-14 lg:w-[600px] border-gray-400 rounded-md text-xl" id="razonSocial" {...register("razonSocial")} placeholder="Razón Social" />
                     {errors.razonSocial && <p className="px-5 text-red-600 font-bold animate-scale-infinite">{errors.razonSocial.message}</p>}
                 </div>
             </div>

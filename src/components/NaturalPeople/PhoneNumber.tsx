@@ -18,7 +18,7 @@ const PhoneNumber = ({ register, errors }: PhoneNumberProps) => {
           Teléfono
         </label>
         <input
-          className="w-64 lg:w-[600px] px-5 h-10 ml-5 border-2 border-gray-600 rounded-md text-xl"
+          className="w-64 xl:w-96 lg:w-[600px] px-5 h-10 ml-5 border-2 border-gray-600 rounded-md text-xl"
           id="idPhone"
           {...register("phoneNumber")}
           placeholder="Teléfono"

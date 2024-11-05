@@ -31,7 +31,7 @@ const ResponseMedium = ({ register, errors }: ResponseMediumProps) => {
       <div className={`mt-8 w-full border-2 flex flex-col items-start justify-center gap-4 pb-3 ${errors.email ? "border-red-500 bg-red-100" : "border-gray-500"}`}>
         <label className="w-full bg-gray-500 text-white text-lg font-bold px-5 py-4" htmlFor="idCorreo">Correo electrónico *</label>
         <input
-          className="w-64 lg:w-[600px] px-5 h-10 ml-5 border-2 border-gray-600 rounded-md text-xl"
+          className="w-64 xl:w-96 lg:w-[600px] px-5 h-10 ml-5 border-2 border-gray-600 rounded-md text-xl"
           id="idCorreo"
           {...register("email")}
           placeholder="Correo"

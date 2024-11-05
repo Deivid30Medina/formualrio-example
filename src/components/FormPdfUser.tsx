@@ -76,7 +76,7 @@ const FormPdfUser: React.FC<FormPdfUserProps> = ({ formData, selectFile }) => {
           marginLeft: "auto",
           marginRight: "auto",
           width: "auto",
-          height: 100,
+          height: 80,
         }}
       />
     </View>

@@ -26,7 +26,7 @@ const NamesAndLastName = ({ register, errors }: NamesAndLastNameProps) => {
           <span className="text-color-obligatorio-form text-2xl">*</span>
         </label>
         <input
-          className="w-64 px-5 border-2 h-14 lg:w-[600px] border-gray-400 rounded-md text-xl"
+          className="w-64 xl:w-96 px-5 border-2 h-14 lg:w-[600px] border-gray-400 rounded-md text-xl"
           id="name"
           {...register("name")}
           placeholder="Nombre"
@@ -43,7 +43,7 @@ const NamesAndLastName = ({ register, errors }: NamesAndLastNameProps) => {
           <span className="text-color-obligatorio-form text-2xl">*</span>
         </label>
         <input
-          className="w-64 px-5 border-2 h-14 lg:w-[600px] border-gray-400 rounded-md text-xl"
+          className="w-64 xl:w-96 px-5 border-2 h-14 lg:w-[600px] border-gray-400 rounded-md text-xl"
           id="idLastName"
           {...register("lastName")}
           placeholder="Primer apellido"
@@ -59,7 +59,7 @@ const NamesAndLastName = ({ register, errors }: NamesAndLastNameProps) => {
           Segundo Apellido:
         </label>
         <input
-          className="w-64 px-5 border-2 h-14 lg:w-[600px] border-gray-400 rounded-md text-xl"
+          className="w-64 xl:w-96 px-5 border-2 h-14 lg:w-[600px] border-gray-400 rounded-md text-xl"
           id="idSecondLastName"
           {...register("secondLastName")}
           placeholder="Segundo apellido"

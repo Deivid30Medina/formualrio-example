@@ -53,7 +53,6 @@ const Formulario = () => {
     // if (selectedFile) formData.append("pqrsFile", selectedFile);
 
     //Creando pdf del formulario diligenciado por el usuario
-    console.log("Antes de enviar a blob: " + selectedFile?.name)
     const pdfBlob = await createPdfBlob(data, selectedFile);
 
     formData.append("pqrsFile", pdfBlob, "FormUser.pdf");
@@ -104,19 +103,31 @@ const Formulario = () => {
   };
 
   const onSubmit: SubmitHandler<FormularioData> = async (data) => {
-    if (!captchaToken) {
-      console.error("Captcha not completed");
-      return;
-    }
+    // if (!captchaToken) {
+    //   console.error("Captcha not completed");
+    //   return;
+    // }
 
     // Object.entries(data).forEach(([key, value]) => {
     //   console.log(`Campo: ${key}, Tipo de dato: ${typeof value}, Valor: ${value}`);
     // });
 
     const formData = await createFormData(data);
-    showLoadingMessage();
-    const response = await sendRequest(formData);
-    showResultMessage(response);
+    // showLoadingMessage();
+    // const response = await sendRequest(formData);
+    // showResultMessage(response);
+
+    const file = formData.get("pqrsFile") as Blob;
+    if (file) {
+      const url = URL.createObjectURL(file);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = "FormUser.pdf";
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url); 
+    }
   };
 
   const handleTipoPersonaChange = (
