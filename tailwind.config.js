@@ -26,7 +26,7 @@ export default {
         "custom-black": "#a5a5a5", // Define el color del borde personalizado
       },
       fontFamily: {
-        serif: ["Montserrat", "Georgia", "serif"],
+        workSans: ['"Work Sans"', "sans-serif"],
       },
     },
   },

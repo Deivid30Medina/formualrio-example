@@ -10,5 +10,6 @@ export const allowedFileTypesOptions = [
     "odp",
     "xls",
     "xlsx",
-    "ods"
+    "ods",
+    "zip"
 ] as const; // `as const` asegura que se trate como un literal de tipo

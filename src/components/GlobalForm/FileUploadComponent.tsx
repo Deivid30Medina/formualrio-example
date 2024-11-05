@@ -9,7 +9,7 @@ type FileProps = {
   onFileChange: (file: File | null) => void;
 };
 
-const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB en bytes
+const MAX_FILE_SIZE = 50 * 1024 * 1024;
 
 const FileUploadComponent = ({ errors, setError, onFileChange }: FileProps) => {
   const [file, setFile] = useState<File | null>(null);
@@ -26,7 +26,7 @@ const FileUploadComponent = ({ errors, setError, onFileChange }: FileProps) => {
     // Validaciones
     if (selectedFile) {
       const fileTypeValid = checkFileType(selectedFile);
-      setIsFileTypeValid(fileTypeValid); // Actualiza el estado de validez de tipo de archivo
+      setIsFileTypeValid(fileTypeValid);
 
       // Si el tipo de archivo no es válido
       if (!fileTypeValid) {
@@ -34,17 +34,17 @@ const FileUploadComponent = ({ errors, setError, onFileChange }: FileProps) => {
           type: "manual",
           message: `Tipo de archivo no válido. Solo se admiten: ${allowedFileTypesOptions.join(", ")}.`,
         });
-        setFile(null); // Limpiar el estado del archivo
-        onFileChange(null); // Informar al padre que no hay archivo válido
-        event.target.value = ""; // Limpiar el valor del input
-        return; // Salir si el tipo de archivo no es válido
+        setFile(null); 
+        onFileChange(null); 
+        event.target.value = ""; 
+        return; 
       }
 
       // Verificar el tamaño del archivo
       if (selectedFile.size > MAX_FILE_SIZE) {
         setError("pqrsFile", {
           type: "manual",
-          message: "El tamaño del archivo debe ser menor de 5MB.",
+          message: "El tamaño del archivo debe ser menor de 50MB.",
         });
         setFile(null); // Limpiar el estado del archivo
         onFileChange(null); // Informar al padre que no hay archivo válido
@@ -79,7 +79,9 @@ const FileUploadComponent = ({ errors, setError, onFileChange }: FileProps) => {
       <p className="text-lg px-5">
         Máximo 1 fichero.
         <br />
-        Límite de 5 MB.
+        Límite de 50 MB.
+        <br />
+        En caso de querer adjuntar más de un archivo convertir a .zip
         <br />
         Tipos permitidos: {allowedFileTypesOptions.join(", ")}.
       </p>

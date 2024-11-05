@@ -50,12 +50,13 @@ const Formulario = () => {
     Object.entries(data).forEach(([key, value]) => {
       formData.append(key, value as string);
     });
-    // if (selectedFile) formData.append("pqrsFile", selectedFile);
+    if (selectedFile) formData.append("pqrsFile", selectedFile);
 
     //Creando pdf del formulario diligenciado por el usuario
     const pdfBlob = await createPdfBlob(data, selectedFile);
 
-    formData.append("pqrsFile", pdfBlob, "FormUser.pdf");
+    formData.append("formUserPdf", pdfBlob, "FormUser.pdf");
+
     return formData;
   };
 
@@ -113,21 +114,22 @@ const Formulario = () => {
     // });
 
     const formData = await createFormData(data);
-    // showLoadingMessage();
-    // const response = await sendRequest(formData);
-    // showResultMessage(response);
+    showLoadingMessage();
+    const response = await sendRequest(formData);
+    showResultMessage(response);
 
-    const file = formData.get("pqrsFile") as Blob;
-    if (file) {
-      const url = URL.createObjectURL(file);
-      const link = document.createElement("a");
-      link.href = url;
-      link.download = "FormUser.pdf";
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-      URL.revokeObjectURL(url); 
-    }
+    //Descargar pdf form del usuario
+    // const file = formData.get("pqrsFile") as Blob;
+    // if (file) {
+    //   const url = URL.createObjectURL(file);
+    //   const link = document.createElement("a");
+    //   link.href = url;
+    //   link.download = "FormUser.pdf";
+    //   document.body.appendChild(link);
+    //   link.click();
+    //   document.body.removeChild(link);
+    //   URL.revokeObjectURL(url); 
+    // }
   };
 
   const handleTipoPersonaChange = (

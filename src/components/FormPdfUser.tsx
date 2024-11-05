@@ -1,6 +1,14 @@
 // FormPdfUser.tsx
 import React from "react";
-import { Page, Text, View, Document, Image } from "@react-pdf/renderer";
+import {
+  Page,
+  Text,
+  View,
+  Document,
+  Image,
+  StyleSheet,
+  Font,
+} from "@react-pdf/renderer";
 import { requestOptions } from "../utils/requestOptions";
 import { reasonForRequestOptions } from "../utils/reasonForRequestOptions";
 import { typePersonOptions } from "../utils/typePersonOptions";
@@ -13,6 +21,26 @@ interface FormPdfUserProps {
   formData: PqrsFormData;
   selectFile: File | null;
 }
+
+Font.register({
+  family: "WorkSans",
+  fonts: [
+    { src: "fonts/workSans/WorkSans-Regular.ttf", fontWeight: "normal" },
+    { src: "fonts/workSans/WorkSans-Bold.ttf", fontWeight: "bold" },
+    { src: "fonts/workSans/WorkSans-SemiBold.ttf", fontWeight: "semibold" },
+  ],
+});
+
+const styles = StyleSheet.create({
+  text: {
+    fontFamily: "WorkSans",
+    fontWeight: "semibold",
+    marginTop: 10
+  },
+  globalStyles: {
+    fontSize: 14
+  }
+});
 
 const FormPdfUser: React.FC<FormPdfUserProps> = ({ formData, selectFile }) => {
   const getRequestLabel = (value: string) => {
@@ -107,94 +135,108 @@ const FormPdfUser: React.FC<FormPdfUserProps> = ({ formData, selectFile }) => {
       <Page size="A4" style={{ padding: 30 }}>
         <Header />
         <View>
-          <Text style={{ fontSize: 24, marginBottom: 20 }}>
+          <Text style={{ fontSize: 18, marginBottom: 18, textAlign: "center" }}>
             Formulario PQRSD DNDA
           </Text>
-          <Text style={{ fontSize: 18 }}>
-            <Text style={{ fontWeight: "bold" }}>Tipo de Solicitud: </Text>
+          
+          <Text style={[styles.text, styles.globalStyles]}>Tipo de Solicitud:</Text>
+          <Text style={styles.globalStyles}>
             {getRequestLabel(formData.typeRequest)}
           </Text>
-          <Text style={{ fontSize: 18 }}>
-            <Text style={{ fontWeight: 700 }}>
-              Motivo de la solicitud:{" "}
-            </Text>
+
+          <Text style={[styles.text, styles.globalStyles]}>Motivo de la solicitud:</Text>
+          <Text style={styles.globalStyles}>
             {getReasonRequestLabel(formData.reasonRequest)}
           </Text>
-          <Text style={{ color: "red", fontSize: 18 }}>
-            Motivo de la solicitud:
-          </Text>
-          <Text style={{ fontSize: 18 }}>
-            Tipo de persona: {getTypePersonOptions(formData.typePerson)}
+
+          <Text style={[styles.text, styles.globalStyles]}>Tipo de persona:</Text>
+          <Text style={styles.globalStyles}>
+            {getTypePersonOptions(formData.typePerson)}
           </Text>
           {formData.typePerson === "1" && (
             <>
-              <Text>Número de cedula: {formData.numberDocument}</Text>
-              <Text>Nombres: {formData.name}</Text>
-              <Text>Primer apellido: {formData.lastName}</Text>
-              <Text>
-                Segundo apellido:{" "}
+              <Text style={[styles.text, styles.globalStyles]}>Número de cedula:</Text>
+              <Text style={styles.globalStyles}> {formData.numberDocument}</Text>
+
+              <Text style={[styles.text, styles.globalStyles]}>Nombres: </Text>
+              <Text style={styles.globalStyles}>{formData.name}</Text>
+
+              <Text style={[styles.text, styles.globalStyles]}>Primer apellido:</Text>
+              <Text style={styles.globalStyles}>{formData.lastName}</Text>
+
+              <Text style={[styles.text, styles.globalStyles]}>Segundo apellido:</Text>
+              <Text style={styles.globalStyles}>
                 {formData.secondLastName
                   ? formData.secondLastName
                   : "No se ingreso segundo apellido por parte del usuario."}
               </Text>
-              <Text>
-                Telefono:{" "}
+
+              <Text style={[styles.text, styles.globalStyles]}>Teléfono:</Text>
+              <Text style={styles.globalStyles}>
                 {formData.phoneNumber
                   ? formData.phoneNumber
                   : "No se ingreso teléfono por parte del usuario."}
               </Text>
-              <Text style={{ fontSize: 18 }}>
-                Tipo de población: {getPopulation(formData.typePopulation)}
+
+              <Text style={[styles.text, styles.globalStyles]}>Tipo de población:</Text>
+              <Text style={styles.globalStyles}>
+                {getPopulation(formData.typePopulation)}
               </Text>
-              <Text style={{ fontSize: 18 }}>
-                Tipo de discapacidad: {getDisability(formData.typeDisability)}
+
+              <Text style={[styles.text, styles.globalStyles]}>Tipo de discapacidad:</Text>
+              <Text style={styles.globalStyles}>
+                {getDisability(formData.typeDisability)}
               </Text>
             </>
           )}
 
           {formData.typePerson === "2" && (
             <>
-              <Text>Nit: {formData.nit}</Text>
-              <Text>Razón Social: {formData.razonSocial}</Text>
+              <Text style={[styles.text, styles.globalStyles]}>Nit:</Text>
+              <Text style={styles.globalStyles}>{formData.nit}</Text>
+              <Text style={[styles.text, styles.globalStyles]}>Razón Social:</Text>
+              <Text style={styles.globalStyles}>{formData.razonSocial}</Text>
             </>
           )}
 
           {formData.typePerson === "3" && (
             <>
-              <Text style={{ fontSize: 18 }}>
-                Medio de respuesta:{" "}
+              <Text style={[styles.text, styles.globalStyles]}>Medio de respuesta:</Text>
+              <Text style={styles.globalStyles}>
                 {getResponseMedium(formData.responseMediumAnonymous)}
               </Text>
-              <Text>
-                Correo electrónico:{" "}
+              <Text style={[styles.text, styles.globalStyles]}>Correo electrónico:</Text>
+              <Text style={styles.globalStyles}>
                 {formData.emailAnonymous
-                  ? formData.email
+                  ? formData.emailAnonymous
                   : "No se ingresó correo por parte del usuario."}
-              </Text>{" "}
-              <Text>Correo electronico: {formData.emailAnonymous}</Text>
+              </Text>
             </>
           )}
 
           {(formData.typePerson === "1" || formData.typePerson === "2") && (
             <>
-              <Text style={{ fontSize: 18 }}>
-                Medio de respuesta: {getResponseMedium(formData.responseMedium)}
+              <Text style={[styles.text, styles.globalStyles]}>Medio de respuesta:</Text>
+              <Text style={styles.globalStyles}>
+                {getResponseMedium(formData.responseMedium)}
               </Text>
-              <Text>Correo electronico: {formData.email}</Text>
+              <Text style={[styles.text, styles.globalStyles]}>Correo electronico:</Text>
+              <Text style={styles.globalStyles}>{formData.email}</Text>
             </>
           )}
 
-          <Text>Descripción de la pqrs: {formData.descriptionPqrs}</Text>
+          <Text style={[styles.text, styles.globalStyles]}>Descripción de la pqrs:</Text>
+          <Text style={styles.globalStyles}>{formData.descriptionPqrs}</Text>
 
-          <Text style={{ fontSize: 18 }}>
-            Archivo adjunto: {getDataFile(selectFile)}
-          </Text>
+          <Text style={[styles.text, styles.globalStyles]}>Archivo adjunto:</Text>
+          <Text style={styles.globalStyles}>{getDataFile(selectFile)}</Text>
 
           {(formData.typePerson == "1" || formData.typePerson == "2") && (
             <>
-              <Text style={{ fontSize: 18 }}>
-                Acepta los términos del servicio: {getTerminos(formData)}
+              <Text style={[styles.text, styles.globalStyles]}>
+                Acepta los términos del servicio:
               </Text>
+              <Text style={styles.globalStyles}>{getTerminos(formData)}</Text>
             </>
           )}
           {/* Agrega más campos según lo que necesites */}
