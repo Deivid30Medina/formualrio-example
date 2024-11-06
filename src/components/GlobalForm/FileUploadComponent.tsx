@@ -81,7 +81,7 @@ const FileUploadComponent = ({ errors, setError, onFileChange }: FileProps) => {
         <br />
         Límite de 50 MB.
         <br />
-        En caso de querer adjuntar más de un archivo convertir a .zip
+        En caso de querer adjuntar más de un archivo comprimir a formato .zip
         <br />
         Tipos permitidos: {allowedFileTypesOptions.join(", ")}.
       </p>

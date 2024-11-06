@@ -44,7 +44,8 @@ export const useRequest = () => {
             }            
 
             // Enviar solicitud con Axios sin especificar el encabezado Content-Type
-            const response = await axios.post("https://localhost:44316/api/v1/dnda/pqrs-management", data);
+            // const response = await axios.post("https://localhost:44316/api/v1/dnda/pqrs-management", data);
+            const response = await axios.post("https://apps.derechodeautor.gov.co/pqrs/api/v1/dnda/pqrs-management", data);
 
             setLoading(false);
 

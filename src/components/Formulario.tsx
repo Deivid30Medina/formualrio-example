@@ -104,6 +104,7 @@ const Formulario = () => {
   };
 
   const onSubmit: SubmitHandler<FormularioData> = async (data) => {
+    console.log(captchaToken);
     // if (!captchaToken) {
     //   console.error("Captcha not completed");
     //   return;
@@ -118,6 +119,32 @@ const Formulario = () => {
     const response = await sendRequest(formData);
     showResultMessage(response);
 
+    //Limpiar el formualrio si fue exitoso
+    if (response.create) {
+      reset({
+        typeRequest: "", 
+        reasonRequest: "",
+        typeDocument: "",
+        numberDocument: "",
+        name: "",
+        lastName: "",
+        secondLastName: "",
+        nit: "",
+        razonSocial: "",
+        responseMedium: "",
+        email: "",
+        responseMediumAnonymous: "",
+        emailAnonymous: "",
+        phoneNumber: "",
+        descriptionPqrs: "",
+        typePopulation: "",
+        typeDisability: "",
+        pqrsFile: null,
+        aceptaTerminos: false,
+      });
+      console.log("Formulario limpiado.");
+    }
+
     //Descargar pdf form del usuario
     // const file = formData.get("pqrsFile") as Blob;
     // if (file) {
@@ -128,7 +155,7 @@ const Formulario = () => {
     //   document.body.appendChild(link);
     //   link.click();
     //   document.body.removeChild(link);
-    //   URL.revokeObjectURL(url); 
+    //   URL.revokeObjectURL(url);
     // }
   };
 

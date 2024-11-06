@@ -98,8 +98,8 @@ export const formularioSchema = z.object({
   ,
 
   nit: z.string()
-    .min(8, "Nit demsadiado corto.")
-    .max(11, "Nit demasiado largo")
+    .min(8, "Nit demsadiado corto, mínimo deben ser 8 dígitos.")
+    .max(11, "Nit demasiado largo, máximo deben ser 11 dígitos")
     .trim()
     .refine((nit) => !isNaN(parseFloat(nit)),
       "El campo nit debe ser un número."
