@@ -82,7 +82,7 @@ const Formulario = () => {
     Swal.close();
     if (response.create) {
       Swal.fire({
-        title: "¡Solicitud ha radicada con éxito!",
+        title: "¡Su solicitud ha sido radicada con éxito!",
         html: `Su número de radicado es: <strong>${response.numberPqrs}</strong> .<br>
         Para hacerle seguimiento a esta solicitud, por favor dar clic en este enlace
         <a style="color: #3366CC; text-decoration: underline;" href="https://apps.derechodeautor.gov.co/consultar-radicados/" target="_blank" rel="noopener noreferrer">ESTADO DE TRÁMITE</a>.`,
