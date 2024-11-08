@@ -1,14 +1,15 @@
 import { Route, Routes } from "react-router-dom"
 import Formulario from "./components/Formulario"
-import Anwser from "./pages/Anwser"
+import useIframeMessaging from "./utils/iframeMessaging"
 
 function App() {
+
+  useIframeMessaging();
 
   return (
     <>
       <Routes>
         <Route path="/pqrsd-dnda/" element={<Formulario />} />
-        <Route path="/create" element={<Anwser />} /> 
       </Routes>
     </>
   )

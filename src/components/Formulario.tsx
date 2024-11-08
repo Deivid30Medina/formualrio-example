@@ -21,6 +21,7 @@ import TermsAndService from "./ShareForm/TermsAndService";
 import FormPdfUser from "./FormPdfUser";
 import { pdf } from "@react-pdf/renderer";
 import { PqrsFormData } from "../interfaces/PqrsFormData";
+import useIframeMessaging from "../utils/iframeMessaging";
 
 const Formulario = () => {
   const [typePerson, setTipoPersona] = useState<string>("1");
@@ -28,6 +29,9 @@ const Formulario = () => {
   const { sendRequest, loading } = useRequest();
   const [captchaToken, setCaptchaToken] = useState<string | null>(null);
   // const navigate = useNavigate();
+
+  useIframeMessaging();
+
 
   const {
     register,
