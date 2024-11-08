@@ -82,13 +82,13 @@ const Formulario = () => {
     Swal.close();
     if (response.create) {
       Swal.fire({
-        title: "¡Solicitud radicada con éxito!",
+        title: "¡Solicitud ha radicada con éxito!",
         html: `Su número de radicado es: <strong>${response.numberPqrs}</strong> .<br>
         Para hacerle seguimiento a esta solicitud, por favor dar clic en este enlace
-        <a style="color: #002552; text-decoration: underline;" href="https://apps.derechodeautor.gov.co/consultar-radicados/" target="_blank" rel="noopener noreferrer">ESTADO DE TRÁMITE</a>.`,
+        <a style="color: #3366CC; text-decoration: underline;" href="https://apps.derechodeautor.gov.co/consultar-radicados/" target="_blank" rel="noopener noreferrer">ESTADO DE TRÁMITE</a>.`,
         icon: "success",
       }).then(() => {
-        // Puedes redirigir o realizar alguna otra acción si lo necesitas
+        // setCaptchaToken(null);
       });
     } else {
       Swal.fire("Error", response.numberPqrs, "error");
@@ -108,12 +108,13 @@ const Formulario = () => {
   };
 
   const onSubmit: SubmitHandler<FormularioData> = async (data) => {
-    console.log(captchaToken);
-    // if (!captchaToken) {
-    //   console.error("Captcha not completed");
-    //   return;
-    // }
+    // console.log(captchaToken);
+    if (!captchaToken) {
+      console.error("Captcha not completed");
+      return;
+    }
 
+    
     // Object.entries(data).forEach(([key, value]) => {
     //   console.log(`Campo: ${key}, Tipo de dato: ${typeof value}, Valor: ${value}`);
     // });
@@ -125,28 +126,8 @@ const Formulario = () => {
 
     //Limpiar el formualrio si fue exitoso
     if (response.create) {
-      reset({
-        typeRequest: "", 
-        reasonRequest: "",
-        typeDocument: "",
-        numberDocument: "",
-        name: "",
-        lastName: "",
-        secondLastName: "",
-        nit: "",
-        razonSocial: "",
-        responseMedium: "",
-        email: "",
-        responseMediumAnonymous: "",
-        emailAnonymous: "",
-        phoneNumber: "",
-        descriptionPqrs: "",
-        typePopulation: "",
-        typeDisability: "",
-        pqrsFile: null,
-        aceptaTerminos: false,
-      });
-      console.log("Formulario limpiado.");
+      reset();
+      setCaptchaToken(null);  // Vuelve a resetear captcha
     }
 
     //Descargar pdf form del usuario

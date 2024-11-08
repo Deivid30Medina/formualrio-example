@@ -68,7 +68,7 @@ const ResponseMediumAnonymous = ({ register, errors }: ResponseMediumProps) => {
           con el número de radicación en el siguiente link:
           <br />
           <a
-            className="font-bold"
+            className="font-bold text-color-institucional"
             href="https://www.derechodeautor.gov.co/es/respuestas-pqrs-anonimas-o-sin-direccion-de-destinatario"
             target="_blank"
           >

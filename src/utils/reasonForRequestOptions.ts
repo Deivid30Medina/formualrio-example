@@ -8,4 +8,5 @@ export const reasonForRequestOptions = [
     { id: "Registro", value: "7", label: "Registro de obras" },
     { id: "GestionColectiva", value: "8", label: "Sociedades de gestión colectiva" },
     { id: "AtencionTelefonica", value: "9", label: "Atención telefónica" },
+    { id: "otraReason", value: "10", label: "Otra" },
 ] as const;
